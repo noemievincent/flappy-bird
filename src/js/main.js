@@ -1,3 +1,4 @@
+import gameController from "./gameController";
 import background from "./background";
 import ground from "./ground";
 import birdie from "./birdie";
@@ -8,11 +9,13 @@ const game = {
     spriteSheetSrc: '../src/resources/sprite.png',
     sprite: new Image(),
     gravity: 0.9,
+    hasStarted: false,
 
     init() {
         this.ctx = this.canvas.getContext('2d');
         this.sprite.src = this.spriteSheetSrc;
         this.sprite.addEventListener('load', () => {
+            gameController.init(this);
             background.init(this);
             ground.init(this);
             birdie.init(this);
@@ -41,7 +44,7 @@ const game = {
             coordinates.dy,
             coordinates.dw,
             coordinates.dh,
-            )
+        )
     }
 }
 
