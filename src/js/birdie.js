@@ -26,12 +26,13 @@ const birdie = {
     },
 
     update() {
-        if (this.game.hasStared) {
+        if (this.game.hasStarted) {
             if (this.fallSpeed < this.maxFallSpeed) {
                 this.fallSpeed += this.game.gravity;
             }
             this.y += this.fallSpeed;
             this.checkCollisionWithGround();
+            this.checkCollisionWithTubes();
         }
         this.render();
     },
@@ -68,6 +69,17 @@ const birdie = {
             this.y = ground.frame.dy - this.height / 2;
             this.goUp();
         }
+    },
+
+    checkCollisionWithTubes() {
+        this.game.tubesPairs.forEach(tubePair => {
+            if (this.x + this.width / 2 > tubePair.x && this.x + this.width / 2 < tubePair.x + tubePair.width) {
+                if ((this.y - this.height / 2) < tubePair.yTop + tubePair.height || (this.y + this.height / 2) > tubePair.yBottom)
+                {
+                    this.game.cancelAnimation();
+                }
+            }
+        })
     },
 }
 

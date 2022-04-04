@@ -5,7 +5,7 @@ const gameController = {
         window.addEventListener('keydown', (e) => {
             if (e.key === 'z') {
                 if (!game.hasStarted) {
-                    game.hasStared = true;
+                    game.hasStarted = true;
                 }
                 birdie.goUp();
             }
